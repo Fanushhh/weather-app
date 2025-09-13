@@ -1,0 +1,20 @@
+
+.navbar{
+   display:flex;
+   justify-content:space-between;
+   align-items: center;
+   padding:24px;
+   position:relative;
+   z-index:10;
+}
+.settingBtn{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      img{
+         width: 14px;
+      }
+   }
+   .btnSelected{
+      background-color: var(--neutral-700);
+   }

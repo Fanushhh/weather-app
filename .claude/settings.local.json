@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/C:\\Users\\fgabr\\Desktop\\Web development projects\\weather-app/**)",
+      "Read(/C:\\Users\\fgabr\\Desktop\\Web development projects\\weather-app/**)",
+      "Read(/C:\\Users\\fgabr\\Desktop\\Web development projects\\weather-app\\src/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
