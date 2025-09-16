@@ -1,0 +1,97 @@
+
+.weatherWrapper{
+    display:flex;
+    gap:2rem;
+    margin-top:3rem;
+}
+
+.currentWeatherGrid{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows:repeat(3,118px);
+    
+    width: 800px;
+    row-gap:2rem;
+}
+
+.currentWeatherContainer{
+    display:flex;
+    align-items: center;
+    padding:1.5rem;
+    justify-content: space-between;
+    text-align: left;
+    grid-row:span 2;
+    grid-column: 1/-1;
+    background:url("assets/images/bg-today-large.svg") no-repeat left;
+    border-radius: 8px;
+    background-size:cover;
+    .temperatureContainer{
+        display:flex;
+        gap:1rem;
+        align-items: center;
+        p{
+            font-size:96px;
+            font-style:italic;
+            font-weight: 600;
+            letter-spacing: -2px;;
+        }
+    }
+
+}
+.weatherDetailsContainer{
+    display:flex;
+    width: 100%;
+    grid-column: span 4;
+    text-align:left;
+    gap:1rem;
+    div{
+        border:1px solid var(--neutral-600);
+        width: 100%;
+        padding:1.5rem;
+        border-radius: 8px;
+        background-color: var(--neutral-800);
+    }
+    .highlightNumber{
+        font-size:32px;
+        line-height: 36px;
+        margin-top:10px;
+    }
+}
+.hourForcastContainer{
+    background-color: var(--neutral-800);
+    padding:1rem;
+    border-radius: 8px;
+        
+max-width: 384px;
+width: 100%;
+.dayForcastDropdown{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+}
+.weekForcast{
+    
+    grid-column: span 4;
+    h2{
+        text-align: left;
+        margin-bottom:1.25rem;
+    }
+}
+.weekContainer{
+    display:flex;
+    width: 100%;
+    gap:1rem;
+    .dayCard{
+        background-color:var(--neutral-800);
+        padding:1rem 10px;
+        border-radius: 8px;
+        width: 100%;
+        .temperatures{
+            font-size:16px;
+            display:flex;
+            justify-content: space-between;
+        }
+    }
+}

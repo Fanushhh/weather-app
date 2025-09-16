@@ -16,7 +16,7 @@ export const Navbar = () => {
       <div className={styles.logoContainer}>
         <img src="assets/images/logo.svg" alt="" />
       </div>
-      <Dropdown isUnits={true}>
+      <Dropdown isUnits={true} buttonText="Units">
         <button
                     onClick={() =>
                       handleWeatherSettings(

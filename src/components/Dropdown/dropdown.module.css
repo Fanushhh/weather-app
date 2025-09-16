@@ -65,4 +65,7 @@
       transform: rotate(0deg);
       transition: transform 0.4s ease;
    }
+   .dropbtn.lightColor, .dropdownContent.lightColor{
+      background-color: var(--neutral-600);
+   }
    

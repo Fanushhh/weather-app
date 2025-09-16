@@ -2,6 +2,7 @@
 import './App.css'
 import { Navbar } from './components/Navbar/navbar'
 import { SearchBar } from './components/SearchBar/Search'
+import { CurrentWeather } from './components/CurrentWeather/currentWeather'
 function App() {
 
   return (
@@ -11,6 +12,7 @@ function App() {
       
     <h1>How's the sky looking today?</h1>
     <SearchBar />
+    <CurrentWeather />
    </main>
     </>
    

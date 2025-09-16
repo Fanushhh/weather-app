@@ -12,6 +12,12 @@
   font-stretch: 75% 125%;
   font-style: normal;
 }
+@font-face{
+  font-family: 'DM Sans';
+  src: url('assets/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  
+  font-style: italic;
+}
 
 :root {
   /* Typography */
