@@ -12,22 +12,17 @@ const defaults = {
   imperial: {
     temperature: "fahrenheit",
     windSpeed: "mph",
-    precipitation: "in",
+    precipitation: "inch",
   },
 };
 export const WeatherProvider = ({ children }) => {
-  const [weatherSettings, setWeatherSettings] = useState({
-    units: "metric",
-    temperature: "celsius",
-    windSpeed: "km/h",
-    precipitation: "mm",
-  });
+  const [weatherSettings, setWeatherSettings] = useState(defaults["metric"]);
+  console.log(weatherSettings)
   const [currentLocation, setCurrentLocation] = useState({
     latitude: "44.43225",
     longitude: "26.10626",
   });
   const [cityName, setCityName] = useState("Bucharest");
-  console.log(weatherSettings.units);
 
   const { data, isPending, error } = useQuery({
     queryKey: [
@@ -35,14 +30,17 @@ export const WeatherProvider = ({ children }) => {
       currentLocation.latitude,
       currentLocation.longitude,
       weatherSettings.units,
+      weatherSettings.windSpeed,
+      weatherSettings.precipitation,
     ],
     queryFn: async () =>
       fetchWeatherData(
         currentLocation.latitude,
         currentLocation.longitude,
-        weatherSettings.units,
-        weatherSettings.precipitation,
-        weatherSettings.windSpeed
+         weatherSettings.units,
+         weatherSettings.windSpeed,
+         weatherSettings.precipitation,
+         
       ),
   });
   useEffect(() => {

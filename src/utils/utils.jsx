@@ -1,10 +1,12 @@
-export const fetchWeatherData = async (lat, lon, isFahrenheit) => {
+export const fetchWeatherData = async (
+  lat,
+  lon,
+  isFahrenheit,
+  windSpeed,
+  precipitation
+) => {
   const res = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weather_code&current=precipitation,relative_humidity_2m,apparent_temperature,wind_speed_10m,temperature_2m&${
-      isFahrenheit === "imperial"
-        ? "&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch"
-        : ""
-    }`
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code&timezone=auto&daily=temperature_2m_max,temperature_2m_min,weather_code&current=precipitation,relative_humidity_2m,apparent_temperature,wind_speed_10m,temperature_2m,weather_code${isFahrenheit === "imperial" ? "&temperature_unit=fahrenheit" : ""}${windSpeed === "mph" ? "&wind_speed_unit=mph" : ""}${precipitation === "inch" ? "&precipitation_unit=inch" : ""}`
   );
   const weather = await res.json();
   return weather;
@@ -16,11 +18,10 @@ export default async function getCityFromCoords(latitude, longitude) {
       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
     );
     const data = await response.json();
-
     return {
-      city: data.city || data.locality,
+      city: data.city,
       state: data.principalSubdivision,
-      country: data.countryName,
+      country: data.countryName.split(" ").slice(0, 2).join(" "),
     };
   } catch (error) {
     console.error("Geocoding error:", error);
@@ -38,9 +39,12 @@ export function getWeekArray(sorted) {
     "Friday",
     "Saturday",
   ];
-  if(sorted){
+  if (sorted) {
     const currentDayIndex = new Date().getDay();
-    return [...weekDays.slice(currentDayIndex), ...weekDays.slice(0, currentDayIndex)];
+    return [
+      ...weekDays.slice(currentDayIndex),
+      ...weekDays.slice(0, currentDayIndex),
+    ];
   }
   return weekDays;
 }
@@ -79,4 +83,26 @@ export function getCurrentWeatherIcon(weatherCode = 0) {
     default:
       return "assets/images/icon-sunny.webp";
   }
+}
+
+export function getDaily24HourForecast(
+  data,
+  currentDayIndex = 0,
+  currentHourIndex = 13
+) {
+  const hourlyForecast = {};
+  const startIndex =
+    currentDayIndex === 0 ? currentHourIndex : currentDayIndex * 24;
+  const endIndex = currentDayIndex === 0 ? 24 : currentDayIndex * 24 + 24;
+  hourlyForecast.time = data.hourly.time.slice(startIndex, endIndex);
+  hourlyForecast.temperature = data.hourly.temperature_2m.slice(
+    startIndex,
+    endIndex
+  );
+  hourlyForecast.weatherCode = data.hourly.weather_code.slice(
+    startIndex,
+    endIndex
+  );
+
+  return hourlyForecast;
 }

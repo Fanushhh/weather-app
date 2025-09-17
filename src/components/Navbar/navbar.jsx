@@ -95,11 +95,11 @@ export const Navbar = () => {
                       ) : null}
                     </button>
                     <button
-                      onClick={() => setPrecipitation("in")}
+                      onClick={() => setPrecipitation("inch")}
                       className={`${styles.settingBtn} ${weatherSettings.precipitation === 'in' ? styles.btnSelected : ''}`}
                     >
                       Inches (in){" "}
-                      {weatherSettings.precipitation === "in" ? (
+                      {weatherSettings.precipitation === "inch" ? (
                         <img src="assets/images/icon-checkmark.svg" />
                       ) : null}
                     </button>

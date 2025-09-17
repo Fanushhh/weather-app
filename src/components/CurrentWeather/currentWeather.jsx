@@ -1,17 +1,16 @@
 import styles from "./currentWeather.module.css";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { WeatherContext } from "../../WeatherProvider/WeatherContext";
-import { getWeekArray } from "../../utils/utils";
+
 import { Dropdown } from "../Dropdown/dropdown";
-import { getCurrentWeatherIcon } from "../../utils/utils";
+import { getCurrentWeatherIcon,getWeekArray,getDaily24HourForecast } from "../../utils/utils";
 
 export const CurrentWeather = () => {
   const { data, cityName, isPending, error } = useContext(WeatherContext);
-
+  const [currentDayIndex, setCurrentDayIndex] = useState(0);
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>No data available</div>;
-  const week = getWeekArray();
   const weekSorted = getWeekArray(true);
   const currentDay = new Date(data.current.time).toLocaleDateString("en-US", {
     weekday: "long",
@@ -20,7 +19,18 @@ export const CurrentWeather = () => {
     year: "numeric",
   });
   console.log(data)
-  const currentDayIndex = new Date(data.current.time).getDay();
+  const currentHourIndex = new Date(data.current.time).getHours();
+  
+  const day24HourForcast = getDaily24HourForecast(data, currentDayIndex, currentHourIndex);
+  const updatedTime = day24HourForcast.time.map((timeObject, index) => {
+    return {
+      time: new Date(timeObject).toLocaleTimeString("en-US", {hour: '2-digit',}),
+      temperature: Math.round(day24HourForcast.temperature[index]),
+      weatherCode: day24HourForcast.weatherCode[index],
+    }
+  });
+  console.log(weekSorted);
+  
   return (
     <section className={styles.weatherWrapper}>
       <div className={styles.currentWeatherGrid}>
@@ -30,10 +40,9 @@ export const CurrentWeather = () => {
             <p>{currentDay}</p>
           </div>
           <div className={styles.temperatureContainer}>
-            <img src="assets/images/icon-sunny.webp" width={120} height={120} />
+            <img src={getCurrentWeatherIcon(data.current.weather_code)} width={120} height={120} />
             <p>
-              {Math.round(data.current.temperature_2m)}{" "}
-              {data.current_units.apparent_temperature}
+              {Math.round(data.current.temperature_2m)}°
             </p>
           </div>
         </div>
@@ -72,7 +81,7 @@ export const CurrentWeather = () => {
             <div className={styles.weekContainer}>
                 {
                     weekSorted.map((day, index) => {
-                        console.log(day, index)
+                        
                         return(
                             <div key={index} class={styles.dayCard}>
                                 <p>{day.substring(0,3)}</p>
@@ -91,11 +100,25 @@ export const CurrentWeather = () => {
       <div className={styles.hourForcastContainer}>
         <div className={styles.dayForcastDropdown}>
           <h3>Hourly Forecast</h3>
-          <Dropdown lightColor={true} isUnits={false} buttonText={week[currentDayIndex]}>
-            {week.map((day, index) => (
-              <button key={index}>{day}</button>
+          <Dropdown lightColor={true} isUnits={false} buttonText={weekSorted[currentDayIndex]}>
+            {weekSorted.map((day, index) => (
+              <button style={{display:'flex', justifyContent:'space-between'}} key={index} onClick={() => setCurrentDayIndex(index)}>{day} {weekSorted[currentDayIndex] == day ? <img width={15} height={15} src='assets/images/icon-checkmark.svg' /> : ''}</button>
             ))}
           </Dropdown>
+        </div>
+        <div className={styles.hourForcastGrid}>
+          {updatedTime.map((hourData, index) => {
+            return (
+              <div key={index} className={styles.hourCard}>
+                <div>
+                  <img width={40} height={40} src={getCurrentWeatherIcon(day24HourForcast.weatherCode[index])} />
+                  <p>{hourData.time}</p>
+                </div>
+                <p>{Math.round(day24HourForcast.temperature[index])}°</p>
+                
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

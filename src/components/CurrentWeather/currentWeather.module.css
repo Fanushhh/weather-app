@@ -11,6 +11,7 @@
     grid-template-rows:repeat(3,118px);
     
     width: 800px;
+    max-width: 100%;
     row-gap:2rem;
 }
 
@@ -64,6 +65,8 @@
         
 max-width: 384px;
 width: 100%;
+height: 674px;
+overflow: hidden;
 .dayForcastDropdown{
     display: flex;
     justify-content: space-between;
@@ -93,5 +96,68 @@ width: 100%;
             display:flex;
             justify-content: space-between;
         }
+    }
+}
+.hourForcastGrid{
+    display:grid;
+    gap:1rem;
+    overflow: scroll;
+    height: 100%;
+    padding-right:1rem;
+    padding-bottom:3rem;
+}
+.hourCard{
+    background-color: var(--neutral-700);
+    border-radius: 8px;
+    padding: 10px 16px;
+    border:1px solid var(--neutral-600);
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:.5rem;
+    div{
+        display:flex;
+        align-items: center;
+        gap:.5rem;
+    }
+}
+@media (max-width: 1000px){
+    .weatherWrapper{
+        flex-direction: column;
+        align-items: center;
+    }
+    .hourForcastContainer{
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        .hourForcastGrid{
+            padding-bottom:0;
+            padding-right:0;
+        }
+    }
+}
+@media (max-width: 700px){
+    .currentWeatherGrid{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    .currentWeatherContainer{
+        flex-direction: column;
+    }
+    .weatherDetailsContainer{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+    .weekContainer{
+        display:grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .container{
+        padding:1rem;
+    }
+    .temperatureContainer{
+        justify-content: center;
+        gap:1.5rem;
+        width: 100%;
     }
 }
