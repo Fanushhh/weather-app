@@ -1,0 +1,16 @@
+
+
+.errorContainer{
+    margin-top:4rem;
+    img{
+        margin:0 auto;
+    }
+    a{
+        display:inline-block;
+        background-color: var(--neutral-700);
+        color:white;
+        padding:10px 16px;
+        border-radius: 8px;
+        margin-top:1rem;
+    }
+}

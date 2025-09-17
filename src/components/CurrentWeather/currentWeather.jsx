@@ -4,12 +4,13 @@ import { WeatherContext } from "../../WeatherProvider/WeatherContext";
 import { CurrentWeatherLoading } from "../WeatherLoading/WeatherLoading";
 import { Dropdown } from "../Dropdown/dropdown";
 import { getCurrentWeatherIcon,getWeekArray,getDaily24HourForecast } from "../../utils/utils";
+import { ErrorLoading } from "../Error/Error";
 
 export const CurrentWeather = () => {
-  const { data, cityName, isPending, error } = useContext(WeatherContext);
+  const { data, cityName, isPending, error, isLoading } = useContext(WeatherContext);
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
-  if (isPending) return <CurrentWeatherLoading />;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <CurrentWeatherLoading />;
+  if (error) return <ErrorLoading />;
   if (!data) return <div>No data available</div>;
   const weekSorted = getWeekArray(true);
   const currentDay = new Date(data.current.time).toLocaleDateString("en-US", {
