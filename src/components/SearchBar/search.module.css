@@ -70,3 +70,17 @@
     padding:8px;
     display:block;
 }
+
+@media (max-width:600px){
+  .searchContainer{
+    flex-direction: column;
+    width: 100%;
+  }
+  .searchButton{
+    width: 100%;
+  }
+  .searchBar{
+        padding-right:1rem;
+        
+    }
+}

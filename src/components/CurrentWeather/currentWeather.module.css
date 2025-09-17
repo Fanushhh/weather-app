@@ -141,9 +141,13 @@ overflow: hidden;
     .currentWeatherGrid{
         grid-template-columns: 1fr;
         grid-template-rows: auto;
+        
     }
+    
     .currentWeatherContainer{
         flex-direction: column;
+        background:url("/assets/images/bg-today-small.svg") no-repeat center;
+        text-align: center;
     }
     .weatherDetailsContainer{
         display:grid;
