@@ -34,21 +34,16 @@ export const WeatherProvider = ({ children }) => {
       weatherSettings.windSpeed,
       weatherSettings.precipitation,
     ],
-    queryFn: async () => {
-    // Intentionally throw an error
-    throw new Error('Something went wrong!');
-  }
-    
-    // async () =>
-    //   fetchWeatherData(
-    //     currentLocation.latitude,
-    //     currentLocation.longitude,
-    //      weatherSettings.units,
-    //      weatherSettings.temperature,
-    //      weatherSettings.windSpeed,
-    //      weatherSettings.precipitation,
+    queryFn: async () =>
+      fetchWeatherData(
+        currentLocation.latitude,
+        currentLocation.longitude,
+         weatherSettings.units,
+         weatherSettings.temperature,
+         weatherSettings.windSpeed,
+         weatherSettings.precipitation,
          
-    //   ),
+      ),
       
   });
   useEffect(() => {
