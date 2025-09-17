@@ -30,6 +30,7 @@ export const WeatherProvider = ({ children }) => {
       currentLocation.latitude,
       currentLocation.longitude,
       weatherSettings.units,
+      weatherSettings.temperature,
       weatherSettings.windSpeed,
       weatherSettings.precipitation,
     ],
@@ -38,6 +39,7 @@ export const WeatherProvider = ({ children }) => {
         currentLocation.latitude,
         currentLocation.longitude,
          weatherSettings.units,
+         weatherSettings.temperature,
          weatherSettings.windSpeed,
          weatherSettings.precipitation,
          

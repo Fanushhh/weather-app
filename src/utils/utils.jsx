@@ -2,11 +2,12 @@ export const fetchWeatherData = async (
   lat,
   lon,
   isFahrenheit,
+  temperature,
   windSpeed,
   precipitation
 ) => {
   const res = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code&timezone=auto&daily=temperature_2m_max,temperature_2m_min,weather_code&current=precipitation,relative_humidity_2m,apparent_temperature,wind_speed_10m,temperature_2m,weather_code${isFahrenheit === "imperial" ? "&temperature_unit=fahrenheit" : ""}${windSpeed === "mph" ? "&wind_speed_unit=mph" : ""}${precipitation === "inch" ? "&precipitation_unit=inch" : ""}`
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code&timezone=auto&daily=temperature_2m_max,temperature_2m_min,weather_code&current=precipitation,relative_humidity_2m,apparent_temperature,wind_speed_10m,temperature_2m,weather_code${isFahrenheit === "imperial" || temperature === 'fahrenheit' ? "&temperature_unit=fahrenheit" : ""}${windSpeed === "mph" ? "&wind_speed_unit=mph" : ""}${precipitation === "inch" ? "&precipitation_unit=inch" : ""}`
   );
   const weather = await res.json();
   return weather;
