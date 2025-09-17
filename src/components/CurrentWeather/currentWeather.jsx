@@ -23,7 +23,7 @@ export const CurrentWeather = () => {
   const day24HourForcast = getDaily24HourForecast(data, currentDayIndex, currentHourIndex);
   const updatedTime = day24HourForcast.time.map((timeObject, index) => {
     return {
-      time: new Date(timeObject).toLocaleTimeString("en-US", {hour: '2-digit',}),
+      time: new Date(timeObject).toLocaleTimeString("en-US", {hour: 'numeric',}),
       temperature: Math.round(day24HourForcast.temperature[index]),
       weatherCode: day24HourForcast.weatherCode[index],
     }
