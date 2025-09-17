@@ -18,7 +18,6 @@ export const CurrentWeather = () => {
     day: "2-digit",
     year: "numeric",
   });
-  console.log(data)
   const currentHourIndex = new Date(data.current.time).getHours();
   
   const day24HourForcast = getDaily24HourForecast(data, currentDayIndex, currentHourIndex);
@@ -29,7 +28,6 @@ export const CurrentWeather = () => {
       weatherCode: day24HourForcast.weatherCode[index],
     }
   });
-  console.log(weekSorted);
   
   return (
     <section className={styles.weatherWrapper}>

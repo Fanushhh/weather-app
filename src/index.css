@@ -1,15 +1,13 @@
 @font-face {
   font-family: 'Bricolage Grotesque';
   src: url('assets/fonts/Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype');
-  font-weight: 125 950;
-  font-stretch: 75% 125%;
+  
   font-style:normal;
 }
 @font-face{
   font-family: 'DM Sans';
   src: url('assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
-  font-weight: 125 950;
-  font-stretch: 75% 125%;
+  
   font-style: normal;
 }
 @font-face{

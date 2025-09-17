@@ -17,7 +17,7 @@ const defaults = {
 };
 export const WeatherProvider = ({ children }) => {
   const [weatherSettings, setWeatherSettings] = useState(defaults["metric"]);
-  console.log(weatherSettings)
+  
   const [currentLocation, setCurrentLocation] = useState({
     latitude: "44.43225",
     longitude: "26.10626",
