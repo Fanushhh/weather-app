@@ -1,14 +1,14 @@
 import styles from "./currentWeather.module.css";
 import { useState, useContext } from "react";
 import { WeatherContext } from "../../WeatherProvider/WeatherContext";
-
+import { CurrentWeatherLoading } from "../WeatherLoading/WeatherLoading";
 import { Dropdown } from "../Dropdown/dropdown";
 import { getCurrentWeatherIcon,getWeekArray,getDaily24HourForecast } from "../../utils/utils";
 
 export const CurrentWeather = () => {
   const { data, cityName, isPending, error } = useContext(WeatherContext);
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <CurrentWeatherLoading />;
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>No data available</div>;
   const weekSorted = getWeekArray(true);
