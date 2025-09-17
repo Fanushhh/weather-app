@@ -7,7 +7,7 @@ import { getCurrentWeatherIcon,getWeekArray,getDaily24HourForecast } from "../..
 import { ErrorLoading } from "../Error/Error";
 
 export const CurrentWeather = () => {
-  const { data, cityName, isPending, error, isLoading } = useContext(WeatherContext);
+  const { data, cityName, error, isLoading } = useContext(WeatherContext);
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
   if (isLoading) return <CurrentWeatherLoading />;
   if (error) return <ErrorLoading />;
@@ -82,7 +82,7 @@ export const CurrentWeather = () => {
                     weekSorted.map((day, index) => {
                         
                         return(
-                            <div key={index} class={styles.dayCard}>
+                            <div key={index} className={styles.dayCard}>
                                 <p>{day.substring(0,3)}</p>
                                 <img src={getCurrentWeatherIcon(data.daily.weather_code[index])} />
                                 <div className={styles.temperatures}>
@@ -101,7 +101,7 @@ export const CurrentWeather = () => {
           <h3>Hourly Forecast</h3>
           <Dropdown lightColor={true} isUnits={false} buttonText={weekSorted[currentDayIndex]}>
             {weekSorted.map((day, index) => (
-              <button style={{display:'flex', justifyContent:'space-between'}} key={index} onClick={() => setCurrentDayIndex(index)}>{day} {weekSorted[currentDayIndex] == day ? <img width={15} height={15} src='assets/images/icon-checkmark.svg' /> : ''}</button>
+              <button style={{display:'flex', justifyContent:'space-between'}} key={index} onClick={() => setCurrentDayIndex(index)}>{day} {weekSorted[currentDayIndex] === day ? <img width={15} height={15} src='assets/images/icon-checkmark.svg' /> : ''}</button>
             ))}
           </Dropdown>
         </div>
